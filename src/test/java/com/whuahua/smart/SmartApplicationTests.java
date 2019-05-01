@@ -1,4 +1,4 @@
-package com.whuahua.flyCat;
+package com.whuahua.smart;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FlyCatApplicationTests {
+public class SmartApplicationTests {
 
 	@Test
 	public void contextLoads() {
