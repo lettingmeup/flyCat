@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whuahua.smart.fruit.dao.FruitCommondityDAO" >
+  <resultMap id="BaseResultMap" type="com.whuahua.smart.fruit.po.FruitCommondityPO" >
+    <id column="commodity_id" property="commondityId" jdbcType="BIGINT" />
+    <result column="com_name" property="comName" jdbcType="VARCHAR" />
+    <result column="com_price" property="comPrice" jdbcType="VARCHAR" />
+    <result column="com_ph_dress" property="comPhDress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commodity_id,com_name,com_price,com_ph_dress
+  </sql>
+  <select id="queryAll" resultMap="BaseResultMap">
+  select 
+  commodity_id,com_name,com_price,com_ph_dress
+  from fruit_commondity
+  </select>
+  <select id="queryById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+     select commodity_id,com_name,com_price,com_ph_dress
+            from fruit_commondity where commodity_id=#{commondityId,jdbcType=BIGINT}
+  </select>
+  <select id="queryByLikeName" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select commodity_id,com_name,com_price,com_ph_dress
+            from fruit_commondity where com_name like concat(concat('%',#{comName}),'%')
+
+  </select>
+</mapper>
