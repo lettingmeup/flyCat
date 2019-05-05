@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whuahua.smart.flycat.dao.CartDao" >
+  <resultMap id="BaseResultMap" type="com.whuahua.smart.flycat.po.CartPO" >
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_price" property="goodsPrice" jdbcType="BIGINT" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="count_gooods" property="countGoood" jdbcType="INTEGER" />
+    <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="cartsData_Column_List" >
+  	goods_id,goods_price,goods_name,user_id,count_gooods,goods_img
+  </sql>
+  
+  
+  <select id="queryCart" resultMap="BaseResultMap" >
+  	SELECT 
+  	<include refid="cartsData_Column_List" />
+  	FROM fly_cart where user_id = #{userId}
+  </select>
+  
+  <select id="hasCart" parameterType="com.whuahua.smart.flycat.bo.CartBO" resultMap="BaseResultMap">
+    select <include refid="cartsData_Column_List" /> from fly_cart
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+    and user_id = #{userId,jdbcType=INTEGER}
+  
+  </select>
+  
+  
+  <update id="updateCart" parameterType="com.whuahua.smart.flycat.bo.CartBO">
+  update fly_cart
+    set goods_price = #{goodsPrice,jdbcType=BIGINT},
+      count_gooods = #{countGoood,jdbcType=INTEGER}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+    and user_id = #{userId,jdbcType=INTEGER}
+  
+  </update>
+  
+  <delete id="clearCart" parameterType="com.whuahua.smart.flycat.bo.CartBO">
+  delete from fly_cart where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="removeCart" parameterType="com.whuahua.smart.flycat.bo.CartBO">
+  delete from fly_cart where goods_id = #{goodsId,jdbcType=INTEGER}
+    and user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="addCart" parameterType="com.whuahua.smart.flycat.bo.CartBO">
+   insert into fly_cart (goods_id,goods_price,goods_name,user_id,count_gooods,goods_img) 
+   values (#{goodsId,jdbcType=INTEGER},
+           #{goodsPrice,jdbcType=BIGINT},
+           #{goodsName,jdbcType=VARCHAR},
+           #{userId,jdbcType=INTEGER},
+           #{countGoood,jdbcType=INTEGER},
+           #{goodsImg,jdbcType=VARCHAR})
+  </insert>
+  
+  
+</mapper>
+
+    

@@ -37,6 +37,7 @@ public class GetUserDetailServiceImpl implements GetUserDetailService {
 		
 		}
 		}catch(Exception e) {
+			e.printStackTrace();
 			result.setBackCode("999");
 			result.setBackDesc("操作失败");
 			return result;

@@ -72,6 +72,7 @@ public class QueryGoodsListServiceImpl implements QueryGoodsListService {
 					boList.add(bo);
 				}
 		}catch(Exception e) {
+			e.printStackTrace();
 			result.setBackCode("999");
 			result.setBackDesc("查询结果为空");
 			return result;
@@ -102,6 +103,7 @@ public class QueryGoodsListServiceImpl implements QueryGoodsListService {
 					boList.add(bo);
 				}
 		}catch(Exception e) {
+			e.printStackTrace();
 			result.setBackCode("999");
 			result.setBackDesc("查询结果为空");
 			return result;
