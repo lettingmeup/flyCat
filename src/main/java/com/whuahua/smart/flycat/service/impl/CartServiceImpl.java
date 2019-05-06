@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.whuahua.smart.flycat.bo.CartBO;
 import com.whuahua.smart.flycat.bo.CartListResBO;
@@ -14,6 +16,7 @@ import com.whuahua.smart.flycat.po.CartPO;
 import com.whuahua.smart.flycat.service.CartService;
 
 @Service
+@Transactional
 public class CartServiceImpl implements CartService {
 	@Autowired
 	private CartDao cartDao;
@@ -47,6 +50,7 @@ public class CartServiceImpl implements CartService {
 		    result.setBackDesc("操作成功");
 		   
 		}catch(Exception e) {
+			
 			e.printStackTrace();
 			result.setBackCode("999");
 			result.setBackDesc("操作失败");
@@ -87,6 +91,7 @@ public class CartServiceImpl implements CartService {
 		  result.setBackDesc("操作成功");
 		}
 		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
 			  result.setBackCode("999");
 			  result.setBackDesc("操作失败");
@@ -108,6 +113,7 @@ public class CartServiceImpl implements CartService {
 			  result.setBackCode("000");
 			  result.setBackDesc("操作成功");
 		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
 			  result.setBackCode("999");
 			  result.setBackDesc("操作失败");
@@ -160,6 +166,7 @@ public class CartServiceImpl implements CartService {
 			}
 			
 		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
 			  result.setBackCode("999");
 			  result.setBackDesc("操作失败");

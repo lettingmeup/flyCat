@@ -2,6 +2,8 @@ package com.whuahua.smart.flycat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.whuahua.smart.flycat.bo.ResBaseBO;
 import com.whuahua.smart.flycat.bo.UserBO;
@@ -11,6 +13,7 @@ import com.whuahua.smart.flycat.po.UserPO;
 import com.whuahua.smart.flycat.service.UserSignInService;
 
 @Service
+@Transactional
 public class UserSignInServiceImpl implements UserSignInService {
 
 	@Autowired
@@ -38,6 +41,7 @@ public class UserSignInServiceImpl implements UserSignInService {
 			result.setBackDesc("操作成功");
 		}
 		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
 			result.setBackCode("999");
 			result.setBackDesc("操作失败");

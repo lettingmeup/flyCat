@@ -2,6 +2,7 @@ package com.whuahua.smart.flycat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.whuahua.smart.flycat.bo.UserBO;
 import com.whuahua.smart.flycat.dao.LoginDao;
@@ -9,6 +10,7 @@ import com.whuahua.smart.flycat.po.UserPO;
 import com.whuahua.smart.flycat.service.GetUserDetailService;
 
 @Service
+@Transactional
 public class GetUserDetailServiceImpl implements GetUserDetailService {
 
 	@Autowired

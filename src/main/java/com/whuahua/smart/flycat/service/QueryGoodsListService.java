@@ -1,7 +1,7 @@
 package com.whuahua.smart.flycat.service;
 
 
-import com.whuahua.smart.flycat.bo.GoodsBO;
+
 import com.whuahua.smart.flycat.bo.GoodsListResBO;
 
 public interface QueryGoodsListService {

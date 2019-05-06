@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.whuahua.smart.flycat.bo.CartBO;
-import com.whuahua.smart.flycat.bo.ResBaseBO;
+
 import com.whuahua.smart.flycat.po.CartPO;
 
 @Mapper

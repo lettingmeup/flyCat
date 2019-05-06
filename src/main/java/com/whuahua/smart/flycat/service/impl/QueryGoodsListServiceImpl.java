@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.whuahua.smart.flycat.bo.GoodsBO;
@@ -16,7 +14,7 @@ import com.whuahua.smart.flycat.po.GoodsPO;
 import com.whuahua.smart.flycat.service.QueryGoodsListService;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
+@Transactional
 public class QueryGoodsListServiceImpl implements QueryGoodsListService {
  
 	@Autowired
