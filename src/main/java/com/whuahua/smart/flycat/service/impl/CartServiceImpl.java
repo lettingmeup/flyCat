@@ -25,7 +25,6 @@ public class CartServiceImpl implements CartService {
 	public CartListResBO queryCart(CartBO cartBO) {
 		CartListResBO result = new CartListResBO();
 		List<CartBO> boList = new ArrayList<>();
-		long total = 0;
 		try {
 		List<CartPO> poList = cartDao.queryCart(cartBO);
 		if(poList.size()==0) {
@@ -33,6 +32,7 @@ public class CartServiceImpl implements CartService {
 			result.setBackDesc("查询结果为空");
 			return result;
 		}
+		long count = 0;
 		for(CartPO po:poList) {
 			CartBO bo = new CartBO();
 			bo.setCountGoood(po.getCountGoood());
@@ -41,10 +41,10 @@ public class CartServiceImpl implements CartService {
 			bo.setGoodsName(po.getGoodsName());
 			bo.setGoodsPrice(po.getGoodsPrice());
 			bo.setUserId(po.getUserId());
+			count = count+(po.getGoodsPrice()*bo.getCountGoood());
 			boList.add(bo);
-			total = total+po.getGoodsPrice();
 		}
-		    result.setTotalPrice(total);
+		    result.setTotalPrice(count);
 		    result.setResult(boList);
 		    result.setBackCode("000");
 		    result.setBackDesc("操作成功");
@@ -68,7 +68,6 @@ public class CartServiceImpl implements CartService {
 			CartBO update = new CartBO();
 			update.setGoodsId(cartBO.getGoodsId());
 			update.setUserId(cartBO.getUserId());
-			update.setGoodsPrice(po.getGoodsPrice()+cartBO.getGoodsPrice());
 			update.setCountGoood(po.getCountGoood()+cartBO.getCountGoood());
 			int up = cartDao.updateCart(update);
 			if(up<1) {
@@ -144,7 +143,6 @@ public class CartServiceImpl implements CartService {
 					update.setGoodsId(cartBO.getGoodsId());
 					update.setUserId(cartBO.getUserId());
 					update.setCountGoood(po.getCountGoood()-cartBO.getCountGoood());
-					update.setGoodsPrice(po.getGoodsPrice()-cartBO.getGoodsPrice());
 					int up = cartDao.updateCart(update);
 					if(up<1) {
 						result.setBackCode("999");

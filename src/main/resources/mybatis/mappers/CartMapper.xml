@@ -31,8 +31,7 @@
   
   <update id="updateCart" parameterType="com.whuahua.smart.flycat.bo.CartBO">
   update fly_cart
-    set goods_price = #{goodsPrice,jdbcType=BIGINT},
-      count_gooods = #{countGoood,jdbcType=INTEGER}
+    set count_gooods = #{countGoood,jdbcType=INTEGER}
     where goods_id = #{goodsId,jdbcType=INTEGER}
     and user_id = #{userId,jdbcType=INTEGER}
   

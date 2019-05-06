@@ -9,6 +9,8 @@ import com.whuahua.smart.flycat.dao.LoginDao;
 import com.whuahua.smart.flycat.po.UserPO;
 import com.whuahua.smart.flycat.service.GetUserDetailService;
 
+
+
 @Service
 @Transactional
 public class GetUserDetailServiceImpl implements GetUserDetailService {
@@ -46,5 +48,8 @@ public class GetUserDetailServiceImpl implements GetUserDetailService {
 		}
 		return result;
 	}
+	
+	
+	
 
 }
