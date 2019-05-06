@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whuahua.smart.fruit.dao.FruitYOrderDAO" >
+  <resultMap id="BaseResultMap" type="com.whuahua.smart.fruit.po.FruitYOrderPO" >
+    <id column="y_order_id" property="yOrderId" jdbcType="BIGINT" />
+    <result column="fruit_user_id" property="fruitUserId" jdbcType="BIGINT" />
+    <result column="commondity_id" property="commondityId" jdbcType="BIGINT" />
+    <result column="com_name" property="comName" jdbcType="VARCHAR" />
+    <result column="com_price" property="comPrice" jdbcType="BIGINT" />
+    <result column="friut_num" property="fruitNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    y_order_id,fruit_user_id,commondity_id,com_name,com_price,friut_num
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+  select 
+  y_order_id,fruit_user_id,commondity_id,com_name,com_price,friut_num
+  from fruit_y_order
+  </select>
+  <insert id="insert" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
+  insert into fruit_y_order(fruit_user_id,commondity_id,com_name,com_price,friut_num)
+  values(#{fruitUserId,jdbcType=BIGINT},#{commondityId,jdbcType=BIGINT},#{comName,jdbcType=VARCHAR},
+  #{comPrice,jdbcType=BIGINT},#{fruitNum,jdbcType=VARCHAR})
+  </insert>
+  <delete id="delect" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
+  delete from fruit_y_order where y_order_id=#{yOrderId,jdbcType=BIGINT}
+  </delete>
+  <update id="update" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
+  update fruit_y_order set friut_num=#{fruitNum,jdbcType=VARCHAR} where fruit_user_id=#{fruitUserId,jdbcType=BIGINT}
+  </update>
+</mapper>

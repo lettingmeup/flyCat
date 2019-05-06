@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.whuahua.smart.fruit.bo.FruitUserBO;
 import com.whuahua.smart.fruit.dao.FruitUserDAO;
@@ -12,7 +13,7 @@ import com.whuahua.smart.fruit.po.FruitUserPO;
 import com.whuahua.smart.fruit.service.SelectFruitUserService;
 import com.whuahua.smart.fruit.util.BaseCode;
 @Service
-@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
+@Transactional
 public class SelectFruitUserServiceImpl implements SelectFruitUserService {
 
 	@Autowired
@@ -34,8 +35,10 @@ public class SelectFruitUserServiceImpl implements SelectFruitUserService {
 			bo.setRespDesc(BaseCode.SUCCESS_DESC);
 		} catch (Exception e) {
 			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			bo.setRespCode(BaseCode.FAIL_CODE);
 			bo.setRespDesc(BaseCode.FAIL_DESC);
+			return bo;
 		}
 		
 		return bo;

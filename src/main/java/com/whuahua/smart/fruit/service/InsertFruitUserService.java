@@ -3,6 +3,7 @@ package com.whuahua.smart.fruit.service;
 import org.springframework.stereotype.Service;
 
 import com.whuahua.smart.fruit.bo.FruitUserBO;
+import com.whuahua.smart.fruit.bo.RespBaseBO;
 public interface InsertFruitUserService {
-  public int insert(FruitUserBO fruitUserbo);
+  public RespBaseBO insert(FruitUserBO fruitUserbo);
 }

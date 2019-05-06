@@ -2,9 +2,8 @@ package com.whuahua.smart.fruit.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.whuahua.smart.fruit.bo.FruitUserMsgBO;
 import com.whuahua.smart.fruit.bo.RespBaseBO;
@@ -13,7 +12,7 @@ import com.whuahua.smart.fruit.po.FruitUserMsgPO;
 import com.whuahua.smart.fruit.service.FruitUserMsgService;
 import com.whuahua.smart.fruit.util.BaseCode;
 @Service
-@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
+@Transactional
 public class InsertFruitUserMsgServiceImpl implements FruitUserMsgService {
 
 	@Autowired
@@ -37,8 +36,10 @@ public class InsertFruitUserMsgServiceImpl implements FruitUserMsgService {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			rsp.setRespCode(BaseCode.FAIL_CODE);
 			rsp.setRespDesc(e.getMessage());
+			return rsp;
 		}
 		
 		
@@ -63,8 +64,10 @@ public class InsertFruitUserMsgServiceImpl implements FruitUserMsgService {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			rsp.setRespCode(BaseCode.FAIL_CODE);
 			rsp.setRespDesc(e.getMessage());
+			return rsp;
 		}
 		
 		

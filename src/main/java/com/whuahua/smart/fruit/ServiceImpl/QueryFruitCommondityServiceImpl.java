@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.whuahua.smart.fruit.bo.FruitCommondityBO;
 import com.whuahua.smart.fruit.bo.QueryFruitCommondityBO;
@@ -16,7 +15,7 @@ import com.whuahua.smart.fruit.po.FruitCommondityPO;
 import com.whuahua.smart.fruit.service.QueryFruitCommondityService;
 import com.whuahua.smart.fruit.util.BaseCode;
 @Service
-@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
+@Transactional
 public class QueryFruitCommondityServiceImpl implements QueryFruitCommondityService {
 @Autowired
 private FruitCommondityDAO fruitCommondityDAO;
@@ -46,6 +45,7 @@ private FruitCommondityDAO fruitCommondityDAO;
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			queryFruitCommondityBO.setRespCode(BaseCode.FAIL_CODE);
 			queryFruitCommondityBO.setRespDesc(BaseCode.FAIL_DESC);
 			return queryFruitCommondityBO;
@@ -62,8 +62,10 @@ private FruitCommondityDAO fruitCommondityDAO;
 			 bo.setRespDesc(BaseCode.SUCCESS_DESC);
 		} catch (Exception e) {
 			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			bo.setRespCode(BaseCode.FAIL_CODE);
 			bo.setRespDesc(BaseCode.FAIL_DESC);
+			return bo;
 		}
 		
 		 return bo;
@@ -77,8 +79,10 @@ private FruitCommondityDAO fruitCommondityDAO;
 			 bo.setRespDesc(BaseCode.SUCCESS_DESC);
 		} catch (Exception e) {
 			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			bo.setRespCode(BaseCode.FAIL_CODE);
 			bo.setRespDesc(BaseCode.FAIL_DESC);
+			return bo;
 		}
 		
 		 return bo;
