@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whuahua.smart.flycat.dao.UserSignDao" >
+  <resultMap id="BaseResultMap" type="com.whuahua.smart.flycat.po.UserPO" >
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="user_role" property="userRole" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="buy_code" property="buyCode" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="usersData_Column_List" >
+  	user_id,user_phone,password,openid,user_role,user_name,buy_code
+  </sql>
+  
+   <insert id="userSignIn" parameterType="com.whuahua.smart.flycat.po.UserPO" >
+   insert into fly_user (user_name, user_phone, password, 
+      user_role)
+    values (#{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{userRole,jdbcType=VARCHAR})
+   
+   </insert>
+  
+  
+  
+</mapper>
