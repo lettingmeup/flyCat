@@ -15,7 +15,7 @@ import com.whuahua.smart.fruit.service.FruitYOrderService;
 
 @RestController
 @RequestMapping("/fruit/")
-public class CartController {
+public class FruitYOrderController {
 	
 	@Autowired
 	private FruitYOrderService fruitYOrderService;
