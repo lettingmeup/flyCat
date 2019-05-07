@@ -57,9 +57,19 @@ private FruitCommondityDAO fruitCommondityDAO;
 	}
 	 public QueryFruitCommondityBO queryById(Long id) {
 		 QueryFruitCommondityBO bo=new QueryFruitCommondityBO();
+		 List<FruitCommondityBO> bolist=new ArrayList<>();
 		 try {
 			 FruitCommondityPO po= fruitCommondityDAO.queryById(id);
-			 bo.setFruitCommondityPO(po);
+			 FruitCommondityBO fruitCommondityBO=new FruitCommondityBO();
+			 if(po!=null) {
+				 fruitCommondityBO.setCommondityId(po.getCommondityId());
+				 fruitCommondityBO.setComName(po.getComName());
+				 fruitCommondityBO.setComPhDress(po.getComPhDress());
+				 fruitCommondityBO.setComPrice(po.getComPrice());
+			 }
+			 
+			 bolist.add(fruitCommondityBO);
+			 bo.setFruitCommondityBOList(bolist);
 			 bo.setRespCode(BaseCode.SUCCESS_CODE);
 			 bo.setRespDesc(BaseCode.SUCCESS_DESC);
 		} catch (Exception e) {
@@ -75,9 +85,19 @@ private FruitCommondityDAO fruitCommondityDAO;
 	 }
 	 public QueryFruitCommondityBO queryByLikeName(String name) {
 		 QueryFruitCommondityBO bo=new QueryFruitCommondityBO();
+		 List<FruitCommondityBO> bolist=new ArrayList<>();
 		 try {
 			 FruitCommondityPO po= fruitCommondityDAO.queryByLikeName(name);
-			 bo.setFruitCommondityPO(po);
+			 FruitCommondityBO fruitCommondityBO=new FruitCommondityBO();
+			 if(po!=null) {
+				 fruitCommondityBO.setCommondityId(po.getCommondityId());
+				 fruitCommondityBO.setComName(po.getComName());
+				 fruitCommondityBO.setComPhDress(po.getComPhDress());
+				 fruitCommondityBO.setComPrice(po.getComPrice());
+			 }
+			 
+			 bolist.add(fruitCommondityBO);
+			 bo.setFruitCommondityBOList(bolist);
 			 bo.setRespCode(BaseCode.SUCCESS_CODE);
 			 bo.setRespDesc(BaseCode.SUCCESS_DESC);
 		} catch (Exception e) {
