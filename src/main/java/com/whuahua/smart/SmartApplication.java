@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @ComponentScan(basePackages={"com.whuahua.smart"})
 @EnableTransactionManagement 
-@SpringBootApplication
+@SpringBootApplication 
 public class SmartApplication {
 
 	public static void main(String[] args) {
