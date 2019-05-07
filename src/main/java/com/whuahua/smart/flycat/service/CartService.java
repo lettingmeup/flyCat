@@ -9,5 +9,6 @@ public interface CartService {
 	ResBaseBO removeCart(CartBO cartBO);
 	ResBaseBO clearCart(CartBO cartBO);
 	ResBaseBO addCart(CartBO cartBO);
+	ResBaseBO deleteList(CartBO cartBO);
 
 }

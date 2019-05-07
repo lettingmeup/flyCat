@@ -20,6 +20,30 @@ import com.whuahua.smart.flycat.service.CartService;
 public class CartServiceImpl implements CartService {
 	@Autowired
 	private CartDao cartDao;
+	
+	@Override
+	public ResBaseBO deleteList(CartBO cartBO) {
+		ResBaseBO result = new ResBaseBO();
+		try {
+			int a = cartDao.removeCart(cartBO);
+			if(a==0) {
+				  result.setBackCode("999");
+				  result.setBackDesc("操作失败");
+				  return result;
+			}
+			result.setBackCode("000");
+		    result.setBackDesc("操作成功");
+			
+		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			  result.setBackCode("999");
+			  result.setBackDesc("操作失败");
+			  return result;
+		}
+		return result;
+	}
+
 
 	@Override
 	public CartListResBO queryCart(CartBO cartBO) {
@@ -173,6 +197,7 @@ public class CartServiceImpl implements CartService {
 		return result;
 	}
 
+	
 	
 
 }

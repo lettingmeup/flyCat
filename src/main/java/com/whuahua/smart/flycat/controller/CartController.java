@@ -49,6 +49,12 @@ public class CartController {
 		return result;
 	}
 	
+	@RequestMapping(value="deleteList" ,method=RequestMethod.POST)
+	@ResponseBody
+	public ResBaseBO deleteList(@RequestBody CartBO cartBO) {
+		ResBaseBO result = cartService.deleteList(cartBO);
+		return result;
+	}
 	
 	
 	
