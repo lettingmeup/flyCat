@@ -45,6 +45,8 @@ private FruitCommondityDAO fruitCommondityDAO;
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e.getStackTrace());
+			System.out.println(e.getMessage());
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			queryFruitCommondityBO.setRespCode(BaseCode.FAIL_CODE);
 			queryFruitCommondityBO.setRespDesc(BaseCode.FAIL_DESC);
@@ -63,6 +65,7 @@ private FruitCommondityDAO fruitCommondityDAO;
 		} catch (Exception e) {
 			// TODO: handle exception
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			System.out.println(e.getMessage());
 			bo.setRespCode(BaseCode.FAIL_CODE);
 			bo.setRespDesc(BaseCode.FAIL_DESC);
 			return bo;

@@ -27,7 +27,7 @@
   <delete id="delect" parameterType="com.whuahua.smart.fruit.po.FruitOrderPO">
   delete from fruit_order where order_num=#{orderNum,jdbcType=VARCHAR}
   </delete>
-  <select id="selectById" parameterMap="BaseResultMap">
+  <select id="selectById" parameterType="com.whuahua.smart.fruit.po.FruitOrderPO">
     select order_id,fruit_user_id,order_num,total_price,order_state,friut_num,create_time,update_time
            from fruit_order where order_id=#{order_id,jdbcType=BIGINT}
   </select>

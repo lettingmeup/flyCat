@@ -30,8 +30,8 @@ public class FruitUserMsgController {
 	private SelectFruitUserService selectFruitUserService;
 	@RequestMapping(value="insert" ,method=RequestMethod.POST)
 	@ResponseBody
-	public int insertFruitUser(@RequestBody FruitUserBO fruitUserBO){
-		int a=insertFruitUserService.insert(fruitUserBO);
+	public RespBaseBO insertFruitUser(@RequestBody FruitUserBO fruitUserBO){
+		RespBaseBO a=insertFruitUserService.insert(fruitUserBO);
 		return a;
 	}
 	@RequestMapping(value="updatePassword" ,method=RequestMethod.POST)

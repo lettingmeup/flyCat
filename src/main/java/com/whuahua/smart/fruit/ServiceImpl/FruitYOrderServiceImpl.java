@@ -123,7 +123,6 @@ public class FruitYOrderServiceImpl implements FruitYOrderService {
 				bo.setRespCode(BaseCode.FAIL_CODE);
 				bo.setRespDesc(BaseCode.FAIL_DESC);
 			}
-			int b=1/0;
 		} catch (Exception e) {
 			// TODO: handle exception
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

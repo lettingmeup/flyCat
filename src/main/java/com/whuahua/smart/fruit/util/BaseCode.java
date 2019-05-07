@@ -7,5 +7,5 @@ public class BaseCode {
 	
 	public static String FAIL_CODE="999999";
 	
-	public static String FAIL_DESC="FAIL";
+	public static String FAIL_DESC="操作失败";
 }
