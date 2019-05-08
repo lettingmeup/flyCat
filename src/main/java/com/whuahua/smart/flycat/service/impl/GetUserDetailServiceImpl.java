@@ -33,7 +33,7 @@ public class GetUserDetailServiceImpl implements GetUserDetailService {
 			result.setBuyCode(po.getBuyCode());
 		
 			result.setOpenid(po.getOpenid());
-			result.setPassword(po.getPassword());
+			result.setPassword("");
 			result.setUserId(po.getUserId());
 			result.setUserName(po.getUserName());
 			result.setUserPhone(po.getUserPhone());
