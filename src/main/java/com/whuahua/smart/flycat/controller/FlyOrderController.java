@@ -15,7 +15,7 @@ import com.whuahua.smart.flycat.service.OrderService;
 
 @RestController
 @RequestMapping("/flycat/")
-public class OrderController {
+public class FlyOrderController {
 	
 	@Autowired
 	private OrderService orderService;
