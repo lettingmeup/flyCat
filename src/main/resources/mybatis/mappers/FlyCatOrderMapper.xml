@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whuahua.smart.flycat.dao.OrderDao" >
+  <resultMap id="OrderResultMap" type="com.whuahua.smart.flycat.po.OrderPO" >
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="order_price" property="orderPrice" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="count_gooods" property="countGooods" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="DetailResultMap" type="com.whuahua.smart.flycat.po.OrderDetailPO" >
+    <result column="detail_id" property="detailId" jdbcType="INTEGER" />
+    <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_price" property="goodsPrice" jdbcType="BIGINT" />
+    <result column="count_goods" property="countGoods" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="orderData_Column_List" >
+  	order_id,order_price,create_time,order_state,order_num,user_id,update_time,count_gooods
+  </sql>
+  
+  <sql id="detailData_Column_List" >
+  detail_id,order_num,goods_name,goods_price,count_goods,goods_id,create_time
+  </sql>
+  
+  <select id="queryOrder" resultMap="OrderResultMap" >
+  	SELECT 
+  	<include refid="orderData_Column_List" />
+  	FROM fly_order where user_id = #{userId}
+  </select>
+  
+  <select id="queryDetail" resultMap="DetailResultMap" >
+  	SELECT 
+  	<include refid="detailData_Column_List" />
+  	FROM fly_order_detail where order_num = #{orderNum}
+  </select>
+  
+  <insert id="addOrder" parameterType="com.whuahua.smart.flycat.po.OrderPO">
+   insert into fly_order (order_price,create_time,order_state,order_num,user_id,count_gooods) 
+   values (#{orderPrice,jdbcType=BIGINT},
+           #{createTime,jdbcType=TIMESTAMP},
+           #{orderState,jdbcType=INTEGER},
+           #{orderNum,jdbcType=VARCHAR},
+           #{userId,jdbcType=INTEGER},
+           #{countGooods,jdbcType=INTEGER})
+  </insert>
+  
+  <insert id="addOrderDetail" parameterType="com.whuahua.smart.flycat.po.OrderDetailPO">
+   insert into fly_order_detail (order_num,goods_name,goods_price,count_goods,goods_id,create_time) 
+   values (#{orderNum,jdbcType=VARCHAR},
+           #{goodsName,jdbcType=VARCHAR},
+           #{goodsPrice,jdbcType=BIGINT},
+           #{countGoods,jdbcType=INTEGER},
+           #{goodsId,jdbcType=INTEGER},
+           #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  
+  
+  
+  
+</mapper>
+
+    
