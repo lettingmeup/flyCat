@@ -32,7 +32,7 @@
   <select id="queryOrder" resultMap="OrderResultMap" >
   	SELECT 
   	<include refid="orderData_Column_List" />
-  	FROM fly_order where user_id = #{userId}
+  	FROM fly_order where user_id = #{userId} ORDER BY create_time desc;
   </select>
   
   <select id="queryDetail" resultMap="DetailResultMap" >
