@@ -8,4 +8,6 @@ public interface FruitUserMsgDAO {
  public int insert(FruitUserMsgPO fruitUserMsgPO);
  
  public int update(FruitUserMsgPO fruitUserMsgPO);
+ 
+ public FruitUserMsgPO selectById(Long id);
 }

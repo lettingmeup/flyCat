@@ -7,25 +7,33 @@
     <result column="commondity_id" property="commondityId" jdbcType="BIGINT" />
     <result column="com_name" property="comName" jdbcType="VARCHAR" />
     <result column="com_price" property="comPrice" jdbcType="BIGINT" />
-    <result column="friut_num" property="fruitNum" jdbcType="VARCHAR" />
+    <result column="friut_num" property="fruitNum" jdbcType="BIGINT" />
+    <result column="com_ph_dress" property="comPhDress" jdbcType="VARCHAR" />
+    <result column="selected" property="selected" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    y_order_id,fruit_user_id,commondity_id,com_name,com_price,friut_num
+    y_order_id,fruit_user_id,commondity_id,com_name,com_price,friut_num,com_ph_dress,selected
   </sql>
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
   select 
-  y_order_id,fruit_user_id,commondity_id,com_name,com_price,friut_num
-  from fruit_y_order
+  y_order_id,fruit_user_id,commondity_id,com_name,com_price,friut_num,com_ph_dress,selected
+  from fruit_y_order where fruit_user_id=#{fruitUserId,jdbcType=BIGINT}
   </select>
   <insert id="insert" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
-  insert into fruit_y_order(fruit_user_id,commondity_id,com_name,com_price,friut_num)
+  insert into fruit_y_order(fruit_user_id,commondity_id,com_name,com_price,friut_num,com_ph_dress,selected)
   values(#{fruitUserId,jdbcType=BIGINT},#{commondityId,jdbcType=BIGINT},#{comName,jdbcType=VARCHAR},
-  #{comPrice,jdbcType=BIGINT},#{fruitNum,jdbcType=VARCHAR})
+  #{comPrice,jdbcType=BIGINT},#{fruitNum,jdbcType=BIGINT},#{comPhDress,jdbcType=VARCHAR},#{selected,jdbcType=VARCHAR})
   </insert>
   <delete id="delect" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
   delete from fruit_y_order where y_order_id=#{yOrderId,jdbcType=BIGINT}
   </delete>
   <update id="update" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
-  update fruit_y_order set friut_num=#{fruitNum,jdbcType=VARCHAR} where fruit_user_id=#{fruitUserId,jdbcType=BIGINT}
+  update fruit_y_order set friut_num=#{fruitNum,jdbcType=BIGINT} where fruit_user_id=#{fruitUserId,jdbcType=BIGINT}
+                                                                 and  commondity_id=#{commondityId,jdbcType=BIGINT}   
   </update>
+  <select id="selectByCommondityId" resultMap="BaseResultMap" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
+  select 
+  y_order_id,fruit_user_id,commondity_id,com_name,com_price,friut_num,com_ph_dress,selected
+  from fruit_y_order where fruit_user_id=#{fruitUserId,jdbcType=BIGINT} and  commondity_id=#{commondityId,jdbcType=BIGINT}
+  </select>
 </mapper>

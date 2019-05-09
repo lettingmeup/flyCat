@@ -3,6 +3,14 @@ package com.whuahua.smart.fruit.bo;
 public class RespBaseBO {
 private String respCode;
 private String respDesc;
+private String cookies;
+
+public String getCookies() {
+	return cookies;
+}
+public void setCookies(String cookies) {
+	this.cookies = cookies;
+}
 public String getRespCode() {
 	return respCode;
 }

@@ -26,7 +26,8 @@ private FruitUserDAO fruitUserDAO;
 			fruitUserPO.setFruitUserId(fruitUserbo.getFruitUserId());
 			fruitUserPO.setOpenId(fruitUserbo.getOpenId());
 			fruitUserPO.setPassword(fruitUserbo.getPassword());
-			fruitUserPO.setRole(fruitUserbo.getRole());
+			fruitUserPO.setRole("02");
+			fruitUserPO.setName(fruitUserbo.getName());
 			int a=fruitUserDAO.insert(fruitUserPO);
 			if(a>0) {
 				bo.setRespCode(BaseCode.SUCCESS_CODE);

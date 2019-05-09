@@ -33,8 +33,8 @@ public class FruitYOrderController {
 	}
 	@RequestMapping(value="selectFruitYOrder" ,method=RequestMethod.POST)
 	@ResponseBody
-	public RespBaseBO selectAll() {
-		QueryFruitYOrderBO bo=fruitYOrderService.selectAll();
+	public RespBaseBO selectByUserId(@RequestBody Long id) {
+		QueryFruitYOrderBO bo=fruitYOrderService.selectByUserId(id);
 		return bo;
 	}
 	@RequestMapping(value="updateNum" ,method=RequestMethod.POST)

@@ -11,13 +11,11 @@ public class FruitOrderPO {
 	
 	private String orderState;
 	
-	private String fruitNum;
+	private String totalNum;
 	
 	private String createTime;
 	
 	private String updateTime;
-
-	
 
 	public Long getOrderId() {
 		return orderId;
@@ -59,12 +57,12 @@ public class FruitOrderPO {
 		this.orderState = orderState;
 	}
 
-	public String getFruitNum() {
-		return fruitNum;
+	public String getTotalNum() {
+		return totalNum;
 	}
 
-	public void setFruitNum(String fruitNum) {
-		this.fruitNum = fruitNum;
+	public void setTotalNum(String totalNum) {
+		this.totalNum = totalNum;
 	}
 
 	public String getCreateTime() {
@@ -82,7 +80,7 @@ public class FruitOrderPO {
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-	
+
 	
 
 }

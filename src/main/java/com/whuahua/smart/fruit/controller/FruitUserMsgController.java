@@ -58,4 +58,10 @@ public class FruitUserMsgController {
 		FruitUserBO bo=selectFruitUserService.select(fruitUserBO);
 		return bo;
 	}
+	@RequestMapping(value="selectUserByTel" ,method=RequestMethod.POST)
+	@ResponseBody
+	public FruitUserBO selectByTel(@RequestBody FruitUserBO fruitUserBO) {
+		FruitUserBO bo=selectFruitUserService.selectByTel(fruitUserBO);
+		return bo;
+	}
 }

@@ -1,6 +1,6 @@
 package com.whuahua.smart.fruit.bo;
 
-public class OrderMsgBO extends RespBaseBO{
+public class OrderMsgBO {
 	private Long detailId;
 	
 	private Long commondityId;

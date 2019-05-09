@@ -11,7 +11,9 @@ public interface FruitYOrderDAO {
 
 	public int delect(Long id);
 	
-	public List<FruitYOrderPO> selectAll();
+	public List<FruitYOrderPO> selectByUserId(Long id);
 	
 	public int update(FruitYOrderPO fruitYOrderPO);
+	
+	public FruitYOrderPO selectByCommondityId(FruitYOrderPO fruitYOrderPO);
 }
