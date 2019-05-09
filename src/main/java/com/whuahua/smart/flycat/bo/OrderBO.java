@@ -11,6 +11,13 @@ public class OrderBO {
 	private int userId;
 	private Date updateTime;
 	private int countGooods;
+	private String time;
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	public int getOrderId() {
 		return orderId;
 	}
@@ -63,7 +70,7 @@ public class OrderBO {
 	public String toString() {
 		return "OrderBO [orderId=" + orderId + ", orderPrice=" + orderPrice + ", createTime=" + createTime
 				+ ", orderState=" + orderState + ", orderNum=" + orderNum + ", userId=" + userId + ", updateTime="
-				+ updateTime + ", countGooods=" + countGooods + "]";
+				+ updateTime + ", countGooods=" + countGooods + ", time=" + time + "]";
 	}
 	
 

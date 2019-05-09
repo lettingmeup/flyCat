@@ -49,6 +49,7 @@ public class OrderServiceImpl implements OrderService {
 				bo.setCreateTime(po.getCreateTime());
 				bo.setOrderId(po.getOrderId());
 				bo.setOrderNum(po.getOrderNum());
+				bo.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(po.getCreateTime()));
 				bo.setOrderPrice(po.getOrderPrice());
 				bo.setOrderState(po.getOrderState());
 				bo.setUserId(po.getUserId());
