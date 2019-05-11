@@ -19,11 +19,11 @@ import com.whuahua.smart.fruit.dao.OrderMsgDAO;
 import com.whuahua.smart.fruit.po.FruitCommondityPO;
 import com.whuahua.smart.fruit.po.FruitOrderPO;
 import com.whuahua.smart.fruit.po.OrderMsgPO;
-import com.whuahua.smart.fruit.service.OrderService;
+import com.whuahua.smart.fruit.service.OrderFruitService;
 import com.whuahua.smart.fruit.util.BaseCode;
 @Service
 @Transactional
-public class OrderServiceImpl implements OrderService {
+public class OrderFruitServiceImpl implements OrderFruitService {
 
 	@Autowired
 	private FruitOrderDAO fruitOrderDAO;
