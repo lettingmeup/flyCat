@@ -7,24 +7,24 @@
     <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
     <result column="com_name" property="comName" jdbcType="VARCHAR" />
     <result column="com_price" property="comPrice" jdbcType="BIGINT" />
-    <result column="friut_num" property="fruitNum" jdbcType="VARCHAR" />
+    <result column="fruit_num" property="fruitNum" jdbcType="VARCHAR" />
     <result column="total_price" property="totalPrice" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    detail_id,commodity_id,order_num,com_name,com_price,friut_num,total_price,create_time
+    detail_id,commodity_id,order_num,com_name,com_price,fruit_num,total_price,create_time
   </sql>
   <select id="selectByOrderNum" parameterType="java.lang.String" resultMap="BaseResultMap">
   select 
-  detail_id,commodity_id,order_num,com_name,com_price,friut_num,total_price,create_time
+  detail_id,commodity_id,order_num,com_name,com_price,fruit_num,total_price,create_time
   from order_msg where order_num=#{orderNum,jdbcType=VARCHAR}
   </select>
   <insert id="insert" parameterType="com.whuahua.smart.fruit.po.OrderMsgPO">
-  insert into order_msg(commodity_id,order_num,com_name,com_price,friut_num,total_price,create_time)
+  insert into order_msg(commodity_id,order_num,com_name,com_price,fruit_num,total_price,create_time)
   values(#{commondityId,jdbcType=BIGINT},#{orderNum,jdbcType=VARCHAR},#{comName,jdbcType=VARCHAR},
   #{comPrice,jdbcType=BIGINT},#{fruitNum,jdbcType=VARCHAR},#{totalPrice,jdbcType=BIGINT},#{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <delete id="delect" parameterType="java.lang.String">
+  <delete id="delete" parameterType="java.lang.String">
   delete from order_msg where order_num=#{orderNum,jdbcType=VARCHAR}
   </delete>
 </mapper>

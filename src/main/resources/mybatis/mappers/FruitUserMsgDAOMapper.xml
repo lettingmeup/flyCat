@@ -16,4 +16,5 @@
   update fruit_user_msg set dress=#{dress,jdbcType=VARCHAR}
                     where fruit_user_id=#{fruitUserId,jdbcType=BIGINT}
   </update>
+  <select id=""></select>
 </mapper>

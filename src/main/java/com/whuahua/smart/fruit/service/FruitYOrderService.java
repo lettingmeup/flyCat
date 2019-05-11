@@ -9,7 +9,7 @@ public interface FruitYOrderService {
  
  public RespBaseBO delect(Long id);
  
- public QueryFruitYOrderBO selectAll();
+ public QueryFruitYOrderBO selectByUserId(Long id);
  
  public RespBaseBO updateNum(FruitYOrderBO fruitYOrderBO);
 }

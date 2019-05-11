@@ -10,4 +10,5 @@ public interface FruitUserDAO {
   public int update(FruitUserPO FruitUserPO);
   
   public FruitUserPO select(FruitUserPO fruitUserPO);
+  
 }

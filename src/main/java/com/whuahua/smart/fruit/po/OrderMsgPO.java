@@ -16,6 +16,7 @@ public class OrderMsgPO {
 	private Long totalPrice;
 	
 	private String createTime;
+	
 
 	public Long getDetailId() {
 		return detailId;

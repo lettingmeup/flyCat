@@ -6,7 +6,23 @@ public class FruitYOrderPO {
 	private Long commondityId;
 	private String comName;
 	private Long comPrice;
-	private String fruitNum;
+	private Long fruitNum;
+	private String comPhDress;
+	private String selected;
+	
+	
+	public String getSelected() {
+		return selected;
+	}
+	public void setSelected(String selected) {
+		this.selected = selected;
+	}
+	public String getComPhDress() {
+		return comPhDress;
+	}
+	public void setComPhDress(String comPhDress) {
+		this.comPhDress = comPhDress;
+	}
 	public Long getyOrderId() {
 		return yOrderId;
 	}
@@ -37,10 +53,11 @@ public class FruitYOrderPO {
 	public void setComPrice(Long comPrice) {
 		this.comPrice = comPrice;
 	}
-	public String getFruitNum() {
+	
+	public Long getFruitNum() {
 		return fruitNum;
 	}
-	public void setFruitNum(String fruitNum) {
+	public void setFruitNum(Long fruitNum) {
 		this.fruitNum = fruitNum;
 	}
 	@Override

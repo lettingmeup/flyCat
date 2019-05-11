@@ -1,7 +1,9 @@
 package com.whuahua.smart.fruit.ServiceImpl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +12,11 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.StringUtils;
 
 import com.whuahua.smart.fruit.bo.OrderMsgBO;
+import com.whuahua.smart.fruit.bo.QueryOrderMsgBO;
 import com.whuahua.smart.fruit.bo.RespBaseBO;
+import com.whuahua.smart.fruit.dao.FruitCommondityDAO;
 import com.whuahua.smart.fruit.dao.OrderMsgDAO;
+import com.whuahua.smart.fruit.po.FruitCommondityPO;
 import com.whuahua.smart.fruit.po.OrderMsgPO;
 import com.whuahua.smart.fruit.service.OrderMsgService;
 import com.whuahua.smart.fruit.util.BaseCode;
@@ -21,13 +26,19 @@ public class OrderMsgServiceImpl implements OrderMsgService {
 
 	@Autowired
 	private OrderMsgDAO orderMsgDAO;
+	@Autowired
+	private FruitCommondityDAO fruitCommondityDAO;
 	@Override
-	public OrderMsgBO selectByOrderNum(String orderNum) {
+	public QueryOrderMsgBO selectByOrderNum(String orderNum) {
 		// TODO Auto-generated method stub
-		OrderMsgBO orderMsgBO=new OrderMsgBO();
+		QueryOrderMsgBO queryOrderMsgBO=new QueryOrderMsgBO();
+		List<OrderMsgBO> orderMsgBOs=new ArrayList<>();
 		try {
-			OrderMsgPO po=orderMsgDAO.selectByOrderNum(orderNum);
-			if(po!=null) {
+			List<OrderMsgPO> orderMsgPOs=orderMsgDAO.selectByOrderNum(orderNum);
+			if(orderMsgPOs!=null&&orderMsgPOs.size()>0) {
+				for(OrderMsgPO po:orderMsgPOs) {
+				FruitCommondityPO fruitCommondityPO=fruitCommondityDAO.queryById(po.getCommondityId());
+				OrderMsgBO orderMsgBO=new OrderMsgBO();	
 				orderMsgBO.setCommondityId(po.getCommondityId());
 				orderMsgBO.setComName(po.getComName());
 				orderMsgBO.setCreateTime(po.getCreateTime());
@@ -36,20 +47,23 @@ public class OrderMsgServiceImpl implements OrderMsgService {
 				orderMsgBO.setFruitNum(po.getFruitNum());
 				orderMsgBO.setOrderNum(po.getOrderNum());
 				orderMsgBO.setTotalPrice(po.getTotalPrice());
-				orderMsgBO.setRespCode(BaseCode.SUCCESS_CODE);
-				orderMsgBO.setRespDesc(BaseCode.SUCCESS_DESC);
-			}else {
-				orderMsgBO.setRespCode(BaseCode.SUCCESS_CODE);
-				orderMsgBO.setRespDesc("查询为空");
+				if(fruitCommondityPO!=null) {
+					orderMsgBO.setComPhDress(fruitCommondityPO.getComPhDress());
+				}
+				orderMsgBOs.add(orderMsgBO);
+				}
 			}
+			queryOrderMsgBO.setOrderMsgBOs(orderMsgBOs);
+			queryOrderMsgBO.setRespCode(BaseCode.SUCCESS_CODE);
+			queryOrderMsgBO.setRespDesc(BaseCode.SUCCESS_DESC);
 		} catch (Exception e) {
 			// TODO: handle exception
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			orderMsgBO.setRespCode(BaseCode.FAIL_CODE);
-			orderMsgBO.setRespDesc(BaseCode.FAIL_DESC);
-			return orderMsgBO;
+			queryOrderMsgBO.setRespCode(BaseCode.FAIL_CODE);
+			queryOrderMsgBO.setRespDesc(BaseCode.FAIL_DESC);
+			return queryOrderMsgBO;
 		}
-		return orderMsgBO;
+		return queryOrderMsgBO;
 	}
 
 	@Override

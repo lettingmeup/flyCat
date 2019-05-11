@@ -1,5 +1,7 @@
 package com.whuahua.smart.fruit.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.whuahua.smart.fruit.po.OrderMsgPO;
@@ -9,5 +11,5 @@ public interface OrderMsgDAO {
  
  public int delete(String orderNum);
  
- public OrderMsgPO selectByOrderNum(String orderNum);
+ public List<OrderMsgPO> selectByOrderNum(String orderNum);
 }

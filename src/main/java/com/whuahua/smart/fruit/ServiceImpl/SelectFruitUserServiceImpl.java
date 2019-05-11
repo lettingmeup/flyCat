@@ -31,8 +31,18 @@ public class SelectFruitUserServiceImpl implements SelectFruitUserService {
 			bo.setOpenId(fruitUserPO.getOpenId());
 			bo.setPassword(fruitUserPO.getPassword());
 			bo.setRole(fruitUserPO.getRole());
-			bo.setRespCode(BaseCode.SUCCESS_CODE);
-			bo.setRespDesc(BaseCode.SUCCESS_DESC);
+			bo.setName(fruitUserPO.getName());
+			if(bo.getPassword().equals(fruitUserBO.getPassword())) {
+				bo.setCookies(fruitUserPO.getFruitTelNum());
+				bo.setRespCode(BaseCode.SUCCESS_CODE);
+				bo.setRespDesc(BaseCode.SUCCESS_DESC);
+			}else {
+				FruitUserBO userbo=new FruitUserBO();
+				userbo.setRespCode(BaseCode.FAIL_CODE);
+				userbo.setRespDesc("密码不正确");
+				return userbo;
+			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -41,6 +51,28 @@ public class SelectFruitUserServiceImpl implements SelectFruitUserService {
 			return bo;
 		}
 		
+		return bo;
+	}
+	public FruitUserBO selectByTel(FruitUserBO fruitUserBO) {
+		FruitUserBO bo=new FruitUserBO();
+		try {
+			FruitUserPO po=new FruitUserPO();
+			po.setFruitTelNum(fruitUserBO.getFruitTelNum());
+			FruitUserPO fruitUserPO=fruitUserDAO.select(po);
+			bo.setFruitTelNum(fruitUserPO.getFruitTelNum());
+			bo.setFruitUserId(fruitUserPO.getFruitUserId());
+			bo.setOpenId(fruitUserPO.getOpenId());
+			bo.setPassword(fruitUserPO.getPassword());
+			bo.setRole(fruitUserPO.getRole());
+			bo.setName(fruitUserPO.getName());
+			bo.setRespCode(BaseCode.SUCCESS_CODE);
+			bo.setRespDesc(BaseCode.SUCCESS_DESC);
+		} catch (Exception e) {
+			// TODO: handle exception
+			bo.setRespCode(BaseCode.FAIL_CODE);
+			bo.setRespDesc(BaseCode.FAIL_DESC);
+			return bo;
+		}
 		return bo;
 	}
 

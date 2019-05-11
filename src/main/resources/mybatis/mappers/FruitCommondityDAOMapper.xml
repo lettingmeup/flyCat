@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.whuahua.smart.fruit.po.FruitCommondityPO" >
     <id column="commodity_id" property="commondityId" jdbcType="BIGINT" />
     <result column="com_name" property="comName" jdbcType="VARCHAR" />
-    <result column="com_price" property="comPrice" jdbcType="VARCHAR" />
+    <result column="com_price" property="comPrice" jdbcType="BIGINT" />
     <result column="com_ph_dress" property="comPhDress" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >

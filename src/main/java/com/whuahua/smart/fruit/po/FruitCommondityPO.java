@@ -5,7 +5,7 @@ private Long commondityId;
 
 private String comName;
 
-private String comPrice;
+private Long comPrice;
 
 private String comPhDress;
 
@@ -25,11 +25,12 @@ public void setComName(String comName) {
 	this.comName = comName;
 }
 
-public String getComPrice() {
+
+public Long getComPrice() {
 	return comPrice;
 }
 
-public void setComPrice(String comPrice) {
+public void setComPrice(Long comPrice) {
 	this.comPrice = comPrice;
 }
 

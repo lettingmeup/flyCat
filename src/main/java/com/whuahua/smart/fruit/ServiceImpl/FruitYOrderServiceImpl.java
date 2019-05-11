@@ -26,12 +26,35 @@ public class FruitYOrderServiceImpl implements FruitYOrderService {
 		// TODO Auto-generated method stub
 		RespBaseBO bo=new RespBaseBO();
 		try {
+			FruitYOrderPO yOrderPO=new FruitYOrderPO();
+			yOrderPO.setCommondityId(fruitYOrderBO.getCommondityId());
+			yOrderPO.setFruitUserId(fruitYOrderBO.getFruitUserId());
+			FruitYOrderPO fruitYOrderPO=fruitYOrderDAO.selectByCommondityId(yOrderPO);
+			if(fruitYOrderPO!=null) {
+				FruitYOrderPO orderPO=new FruitYOrderPO();
+				orderPO.setCommondityId(fruitYOrderBO.getCommondityId());
+				orderPO.setFruitUserId(fruitYOrderBO.getFruitUserId());
+				System.out.println("数据库里的值："+fruitYOrderPO.getFruitNum()+"新增值："+fruitYOrderBO.getFruitNum());
+				System.out.println(fruitYOrderPO.getFruitNum()+fruitYOrderBO.getFruitNum());
+				orderPO.setFruitNum(fruitYOrderPO.getFruitNum()+fruitYOrderBO.getFruitNum());
+				int a=fruitYOrderDAO.update(orderPO);
+				if(a>0) {
+					bo.setRespCode(BaseCode.SUCCESS_CODE);
+					bo.setRespDesc(BaseCode.SUCCESS_DESC);
+				}else{
+					bo.setRespCode(BaseCode.FAIL_CODE);
+					bo.setRespDesc(BaseCode.FAIL_DESC);
+				}
+				return bo;
+			}
 			FruitYOrderPO po=new FruitYOrderPO();
 			po.setCommondityId(fruitYOrderBO.getCommondityId());
 			po.setComName(fruitYOrderBO.getComName());
 			po.setComPrice(fruitYOrderBO.getComPrice());
 			po.setFruitNum(fruitYOrderBO.getFruitNum());
 			po.setFruitUserId(fruitYOrderBO.getFruitUserId());
+			po.setComPhDress(fruitYOrderBO.getComPhDress());
+			po.setSelected(fruitYOrderBO.getSelected()+"");
 			int a=fruitYOrderDAO.insert(po);
 			if(a>0) {
 				bo.setRespCode(BaseCode.SUCCESS_CODE);
@@ -55,7 +78,7 @@ public class FruitYOrderServiceImpl implements FruitYOrderService {
 		// TODO Auto-generated method stub
 		RespBaseBO bo=new RespBaseBO();
 		try {
-			int a=fruitYOrderDAO.delect(id);
+			int a=fruitYOrderDAO.delete(id);
 			if(a>0) {
 				bo.setRespCode(BaseCode.SUCCESS_CODE);
 				bo.setRespDesc(BaseCode.SUCCESS_DESC);
@@ -74,12 +97,12 @@ public class FruitYOrderServiceImpl implements FruitYOrderService {
 	}
 
 	@Override
-	public QueryFruitYOrderBO selectAll() {
+	public QueryFruitYOrderBO selectByUserId(Long id) {
 		// TODO Auto-generated method stub
 		QueryFruitYOrderBO queryFruitYOrderBO=new QueryFruitYOrderBO();
 		List<FruitYOrderBO> bolist=new ArrayList<>();
 		try {
-			List<FruitYOrderPO> polist=fruitYOrderDAO.selectAll();
+			List<FruitYOrderPO> polist=fruitYOrderDAO.selectByUserId(id);
 			if(polist!=null&&polist.size()>0) {
 				for(FruitYOrderPO po:polist) {
 					FruitYOrderBO bo=new FruitYOrderBO();
@@ -89,6 +112,12 @@ public class FruitYOrderServiceImpl implements FruitYOrderService {
 					bo.setFruitNum(po.getFruitNum());
 					bo.setFruitUserId(po.getFruitUserId());
 					bo.setyOrderId(po.getyOrderId());
+					bo.setComPhDress(po.getComPhDress());
+					if("true".equals(po.getSelected())) {
+						bo.setSelected(true);
+					}else {
+						bo.setSelected(false);
+					}
 					bolist.add(bo);
 				}
 				queryFruitYOrderBO.setFruitYOrderBO(bolist);
@@ -115,6 +144,7 @@ public class FruitYOrderServiceImpl implements FruitYOrderService {
 			FruitYOrderPO po=new FruitYOrderPO();
 			po.setFruitNum(fruitYOrderBO.getFruitNum());
 			po.setFruitUserId(fruitYOrderBO.getFruitUserId());
+			po.setCommondityId(fruitYOrderBO.getCommondityId());
 			int a=fruitYOrderDAO.update(po);
 			if(a>0) {
 				bo.setRespCode(BaseCode.SUCCESS_CODE);

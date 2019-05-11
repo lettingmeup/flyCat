@@ -34,7 +34,7 @@ public class FruitOrderServiceImpl implements FruitOrderService {
 				for(FruitOrderPO po:polist) {
 					FruitOrderBO bo=new FruitOrderBO();
 					bo.setCreateTime(po.getCreateTime());
-					bo.setFruitNum(po.getFruitNum());
+					bo.setTotalNum(po.getTotalNum());
 					bo.setFruitUserId(po.getFruitUserId());
 					bo.setOrderNum(po.getOrderNum());
 					bo.setOrderState(po.getOrderState());
@@ -66,7 +66,7 @@ public class FruitOrderServiceImpl implements FruitOrderService {
 		FruitOrderPO po=new FruitOrderPO();
 		try {
 			po.setCreateTime(new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(new Date()));
-			po.setFruitNum(fruitOrderBO.getFruitNum());
+			po.setTotalNum(fruitOrderBO.getTotalNum());
 			po.setFruitUserId(fruitOrderBO.getFruitUserId());
 			po.setOrderNum(new SimpleDateFormat("HHmmss").format(new Date())+(int)((Math.random()*9+1)*100000));
 			po.setOrderState(fruitOrderBO.getOrderState());
@@ -114,7 +114,7 @@ public class FruitOrderServiceImpl implements FruitOrderService {
 				FruitOrderPO po=fruitOrderDAO.selectById(id);
 				if(po!=null) {
 					fruitOrderBO.setCreateTime(po.getCreateTime());
-					fruitOrderBO.setFruitNum(po.getFruitNum());
+					fruitOrderBO.setTotalNum(po.getTotalNum());
 					fruitOrderBO.setFruitUserId(po.getFruitUserId());
 					fruitOrderBO.setOrderId(po.getOrderId());
 					fruitOrderBO.setOrderNum(po.getOrderNum());
@@ -134,6 +134,67 @@ public class FruitOrderServiceImpl implements FruitOrderService {
 		}
 		return bo;
 	}
+	 public QueryFruitOrderBO selectByUserIdAndOrderState(FruitOrderBO fruitOrderBO){
+		 QueryFruitOrderBO queryFruitOrderBO=new QueryFruitOrderBO();
+		 List<FruitOrderBO> fruitOrderBOs=new ArrayList<>();
+		 try {
+			 FruitOrderPO fruitOrderPO=new FruitOrderPO();
+			 fruitOrderPO.setFruitUserId(fruitOrderBO.getFruitUserId());
+			 fruitOrderPO.setOrderState(fruitOrderBO.getOrderState());
+			 List<FruitOrderPO> fruitOrderPOs=fruitOrderDAO.selectByUserIdAndOrderState(fruitOrderPO);
+			 if(fruitOrderPOs!=null&&fruitOrderPOs.size()>0) {
+				 for(FruitOrderPO po:fruitOrderPOs) {
+					 FruitOrderBO bo=new FruitOrderBO();
+					 bo.setCreateTime(po.getCreateTime());
+					 bo.setFruitUserId(po.getFruitUserId());
+					 bo.setOrderId(po.getOrderId());
+					 bo.setOrderNum(po.getOrderNum());
+					 bo.setOrderState(po.getOrderState());
+					 bo.setTotalNum(po.getTotalNum());
+					 bo.setTotalPrice(po.getTotalPrice());
+					 bo.setUpdateTime(po.getUpdateTime());
+					 bo.setComPhDress(po.getComPhDress());
+					 fruitOrderBOs.add(bo);
+				 }
+				 
+			 }
+			 queryFruitOrderBO.setFruitOrderBOList(fruitOrderBOs);
+			 queryFruitOrderBO.setRespCode(BaseCode.SUCCESS_CODE);
+			 queryFruitOrderBO.setRespDesc(BaseCode.SUCCESS_DESC);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			queryFruitOrderBO.setRespCode(BaseCode.FAIL_CODE);
+			queryFruitOrderBO.setRespDesc(BaseCode.FAIL_DESC);
+			return queryFruitOrderBO;
+		}
+		 return queryFruitOrderBO;
+		 
+	 }
+	 public RespBaseBO update(Long id) {
+		 RespBaseBO bo=new RespBaseBO();
+		 int a=0;
+		 try {
+			 if(id!=null) {
+				a= fruitOrderDAO.update(id);
+			 }
+			 if(a>0) {
+				 bo.setRespCode(BaseCode.SUCCESS_CODE);
+				 bo.setRespDesc(BaseCode.SUCCESS_DESC);
+			 }else {
+				 bo.setRespCode(BaseCode.FAIL_CODE);
+				 bo.setRespDesc(BaseCode.FAIL_DESC);
+			 }
+		} catch (Exception e) {
+			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			 bo.setRespCode(BaseCode.FAIL_CODE);
+			 bo.setRespDesc(BaseCode.FAIL_DESC);
+			 return bo;
+		}
+		 return bo;
+	 }
 public static void main(String[] args) {
 	System.out.println(new SimpleDateFormat("HHmmss").format(new Date())+(int)((Math.random()*9+1)*100000));
 }
