@@ -16,7 +16,7 @@ import com.whuahua.smart.fruit.bo.QueryOrderMsgBO;
 import com.whuahua.smart.fruit.bo.RespBaseBO;
 import com.whuahua.smart.fruit.service.FruitOrderService;
 import com.whuahua.smart.fruit.service.OrderMsgService;
-import com.whuahua.smart.fruit.service.OrderService;
+import com.whuahua.smart.fruit.service.OrderFruitService;
 import com.whuahua.smart.fruit.util.BaseCode;
 
 @RestController
@@ -28,11 +28,11 @@ public class OrderController {
 	@Autowired
 	private OrderMsgService orderMsgService;
 	@Autowired
-	private OrderService orderService;
+	private OrderFruitService orderFruitService;
 	@RequestMapping(value="insertOrder" ,method=RequestMethod.POST)
 	@ResponseBody
 	public RespBaseBO insertOrder(@RequestBody OrderBO orderBO){
-		RespBaseBO bo=orderService.insert(orderBO);
+		RespBaseBO bo=orderFruitService.insert(orderBO);
 		return bo;
 	}
 	@RequestMapping(value="deleteOrder" ,method=RequestMethod.POST)
@@ -40,7 +40,7 @@ public class OrderController {
 	public RespBaseBO delete(@RequestBody FruitOrderBO fruitOrderBO) {
 		RespBaseBO respBaseBO=new RespBaseBO();
 		if(!StringUtils.isEmpty(fruitOrderBO.getOrderNum())) {
-			respBaseBO=orderService.delete(fruitOrderBO.getOrderNum());
+			respBaseBO=orderFruitService.delete(fruitOrderBO.getOrderNum());
 		}
 		return respBaseBO;
 	}
