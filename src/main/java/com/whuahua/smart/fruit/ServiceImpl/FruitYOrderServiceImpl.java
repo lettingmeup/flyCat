@@ -78,7 +78,7 @@ public class FruitYOrderServiceImpl implements FruitYOrderService {
 		// TODO Auto-generated method stub
 		RespBaseBO bo=new RespBaseBO();
 		try {
-			int a=fruitYOrderDAO.delect(id);
+			int a=fruitYOrderDAO.delete(id);
 			if(a>0) {
 				bo.setRespCode(BaseCode.SUCCESS_CODE);
 				bo.setRespDesc(BaseCode.SUCCESS_DESC);

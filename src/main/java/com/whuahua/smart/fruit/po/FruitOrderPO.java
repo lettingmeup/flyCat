@@ -16,6 +16,17 @@ public class FruitOrderPO {
 	private String createTime;
 	
 	private String updateTime;
+	
+	private String comPhDress;
+	
+
+	public String getComPhDress() {
+		return comPhDress;
+	}
+
+	public void setComPhDress(String comPhDress) {
+		this.comPhDress = comPhDress;
+	}
 
 	public Long getOrderId() {
 		return orderId;

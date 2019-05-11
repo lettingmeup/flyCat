@@ -10,29 +10,34 @@
     <result column="total_num" property="totalNum" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="com_ph_dress" property="comPhDress" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id,fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time
+    order_id,fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time,com_ph_dress
   </sql>
   <select id="queryAll" resultMap="BaseResultMap">
   select 
-  order_id,fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time
+  order_id,fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time,com_ph_dress
   from fruit_order
   </select>
   <insert id="insert" parameterType="com.whuahua.smart.fruit.po.FruitOrderPO">
-  insert into fruit_order(fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time)
+  insert into fruit_order(fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time,com_ph_dress)
   values(#{fruitUserId,jdbcType=BIGINT},#{orderNum,jdbcType=VARCHAR},#{totalPrice,jdbcType=BIGINT},
-  #{orderState,jdbcType=VARCHAR},#{totalNum,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})
+  #{orderState,jdbcType=VARCHAR},#{totalNum,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},
+  #{comPhDress,jdbcType=VARCHAR})
   </insert>
   <delete id="delete" parameterType="com.whuahua.smart.fruit.po.FruitOrderPO">
   delete from fruit_order where order_num=#{orderNum,jdbcType=VARCHAR}
   </delete>
   <select id="selectById" parameterType="com.whuahua.smart.fruit.po.FruitOrderPO">
-    select order_id,fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time
+    select order_id,fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time,com_ph_dress
            from fruit_order where order_id=#{order_id,jdbcType=BIGINT}
   </select>
   <select id="selectByUserIdAndOrderState" resultMap="BaseResultMap" parameterType="com.whuahua.smart.fruit.po.FruitOrderPO">
-    select order_id,fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time
+    select order_id,fruit_user_id,order_num,total_price,order_state,total_num,create_time,update_time,com_ph_dress
            from fruit_order where fruit_user_id=#{fruitUserId,jdbcType=BIGINT} and order_state=#{orderState,jdbcType=VARCHAR}
   </select>
+  <update id="update" parameterType="java.lang.Long">
+  update fruit_order set order_state="2" where order_id=#{orderId,jdbcType=BIGINT}
+  </update>
 </mapper>

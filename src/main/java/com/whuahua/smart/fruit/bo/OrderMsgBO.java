@@ -16,6 +16,17 @@ public class OrderMsgBO {
 	private Long totalPrice;
 	
 	private String createTime;
+	
+	private String comPhDress;
+	
+
+	public String getComPhDress() {
+		return comPhDress;
+	}
+
+	public void setComPhDress(String comPhDress) {
+		this.comPhDress = comPhDress;
+	}
 
 	public Long getDetailId() {
 		return detailId;

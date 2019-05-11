@@ -24,8 +24,8 @@
   values(#{fruitUserId,jdbcType=BIGINT},#{commondityId,jdbcType=BIGINT},#{comName,jdbcType=VARCHAR},
   #{comPrice,jdbcType=BIGINT},#{fruitNum,jdbcType=BIGINT},#{comPhDress,jdbcType=VARCHAR},#{selected,jdbcType=VARCHAR})
   </insert>
-  <delete id="delect" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
-  delete from fruit_y_order where y_order_id=#{yOrderId,jdbcType=BIGINT}
+  <delete id="delete" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
+  delete from fruit_y_order where fruit_user_id=#{fruitUserId,jdbcType=BIGINT}
   </delete>
   <update id="update" parameterType="com.whuahua.smart.fruit.po.FruitYOrderPO">
   update fruit_y_order set friut_num=#{fruitNum,jdbcType=BIGINT} where fruit_user_id=#{fruitUserId,jdbcType=BIGINT}

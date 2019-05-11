@@ -8,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.util.StringUtils;
 
-import com.whuahua.smart.fruit.bo.FruitCommondityBO;
 import com.whuahua.smart.fruit.bo.FruitGoodsBO;
 import com.whuahua.smart.fruit.bo.OrderBO;
 import com.whuahua.smart.fruit.bo.RespBaseBO;
+import com.whuahua.smart.fruit.dao.FruitCommondityDAO;
 import com.whuahua.smart.fruit.dao.FruitOrderDAO;
 import com.whuahua.smart.fruit.dao.OrderMsgDAO;
+import com.whuahua.smart.fruit.po.FruitCommondityPO;
 import com.whuahua.smart.fruit.po.FruitOrderPO;
 import com.whuahua.smart.fruit.po.OrderMsgPO;
 import com.whuahua.smart.fruit.service.OrderService;
@@ -27,6 +29,8 @@ public class OrderServiceImpl implements OrderService {
 	private FruitOrderDAO fruitOrderDAO;
 	@Autowired
 	private OrderMsgDAO orderMsgDAO;
+	@Autowired
+	private FruitCommondityDAO fruitCommondityDAO;
 	@Override
 	public RespBaseBO insert(OrderBO orderBO) {
 		// TODO Auto-generated method stub
@@ -42,6 +46,12 @@ public class OrderServiceImpl implements OrderService {
 			fruitOrderPO.setOrderState(orderBO.getOrderState());
 			fruitOrderPO.setTotalPrice(orderBO.getTotalPrice());
 			fruitOrderPO.setUpdateTime(orderBO.getUpdateTime());
+			if(fruitGoodsBOs!=null&&fruitGoodsBOs.size()>0) {
+				FruitCommondityPO fruitCommondityPO=fruitCommondityDAO.queryById(fruitGoodsBOs.get(0).getCommondityId());
+				if(fruitCommondityPO!=null) {
+					fruitOrderPO.setComPhDress(fruitCommondityPO.getComPhDress());
+				}
+			}
 			int a=fruitOrderDAO.insert(fruitOrderPO);
 			if(a>0) {
 				respBaseBO.setRespCode(BaseCode.SUCCESS_CODE);
@@ -55,10 +65,14 @@ public class OrderServiceImpl implements OrderService {
 				for(FruitGoodsBO bo:fruitGoodsBOs) {
 					OrderMsgPO orderMsgPO=new OrderMsgPO();
 					orderMsgPO.setCommondityId(bo.getCommondityId());
+					
 					orderMsgPO.setComName(bo.getComName());
 					orderMsgPO.setComPrice(bo.getComPrice());
 					orderMsgPO.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 					orderMsgPO.setFruitNum(bo.getFruitNum());
+					if(StringUtils.isEmpty(bo.getFruitNum())) {
+						orderMsgPO.setFruitNum("1");
+					}
 					orderMsgPO.setOrderNum(orderNum);
 					orderMsgPO.setTotalPrice(orderBO.getTotalPrice());
 					int b=orderMsgDAO.insert(orderMsgPO);

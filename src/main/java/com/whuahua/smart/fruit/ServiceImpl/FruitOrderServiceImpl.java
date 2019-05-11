@@ -153,6 +153,7 @@ public class FruitOrderServiceImpl implements FruitOrderService {
 					 bo.setTotalNum(po.getTotalNum());
 					 bo.setTotalPrice(po.getTotalPrice());
 					 bo.setUpdateTime(po.getUpdateTime());
+					 bo.setComPhDress(po.getComPhDress());
 					 fruitOrderBOs.add(bo);
 				 }
 				 
@@ -170,6 +171,29 @@ public class FruitOrderServiceImpl implements FruitOrderService {
 		}
 		 return queryFruitOrderBO;
 		 
+	 }
+	 public RespBaseBO update(Long id) {
+		 RespBaseBO bo=new RespBaseBO();
+		 int a=0;
+		 try {
+			 if(id!=null) {
+				a= fruitOrderDAO.update(id);
+			 }
+			 if(a>0) {
+				 bo.setRespCode(BaseCode.SUCCESS_CODE);
+				 bo.setRespDesc(BaseCode.SUCCESS_DESC);
+			 }else {
+				 bo.setRespCode(BaseCode.FAIL_CODE);
+				 bo.setRespDesc(BaseCode.FAIL_DESC);
+			 }
+		} catch (Exception e) {
+			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			 bo.setRespCode(BaseCode.FAIL_CODE);
+			 bo.setRespDesc(BaseCode.FAIL_DESC);
+			 return bo;
+		}
+		 return bo;
 	 }
 public static void main(String[] args) {
 	System.out.println(new SimpleDateFormat("HHmmss").format(new Date())+(int)((Math.random()*9+1)*100000));

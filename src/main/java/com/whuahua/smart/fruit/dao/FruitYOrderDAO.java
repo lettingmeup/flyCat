@@ -9,7 +9,7 @@ import com.whuahua.smart.fruit.po.FruitYOrderPO;
 public interface FruitYOrderDAO {
 	public int insert(FruitYOrderPO fruitYOrderPO);
 
-	public int delect(Long id);
+	public int delete(Long id);
 	
 	public List<FruitYOrderPO> selectByUserId(Long id);
 	

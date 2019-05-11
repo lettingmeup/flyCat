@@ -16,4 +16,6 @@ public interface FruitOrderService {
  public QueryFruitOrderBO selectById(Long id);
  
  public QueryFruitOrderBO selectByUserIdAndOrderState(FruitOrderBO fruitOrderBO);
+ 
+ public RespBaseBO update(Long id);
 }

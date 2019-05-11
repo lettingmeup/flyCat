@@ -17,4 +17,6 @@ public interface FruitOrderDAO {
 	public FruitOrderPO selectById(Long id);
 	
 	public List<FruitOrderPO> selectByUserIdAndOrderState(FruitOrderPO fruitOrderPO);
+	
+	public int update(Long orderId);
 }

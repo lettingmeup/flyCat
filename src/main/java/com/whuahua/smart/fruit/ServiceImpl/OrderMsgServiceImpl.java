@@ -14,7 +14,9 @@ import org.springframework.util.StringUtils;
 import com.whuahua.smart.fruit.bo.OrderMsgBO;
 import com.whuahua.smart.fruit.bo.QueryOrderMsgBO;
 import com.whuahua.smart.fruit.bo.RespBaseBO;
+import com.whuahua.smart.fruit.dao.FruitCommondityDAO;
 import com.whuahua.smart.fruit.dao.OrderMsgDAO;
+import com.whuahua.smart.fruit.po.FruitCommondityPO;
 import com.whuahua.smart.fruit.po.OrderMsgPO;
 import com.whuahua.smart.fruit.service.OrderMsgService;
 import com.whuahua.smart.fruit.util.BaseCode;
@@ -24,6 +26,8 @@ public class OrderMsgServiceImpl implements OrderMsgService {
 
 	@Autowired
 	private OrderMsgDAO orderMsgDAO;
+	@Autowired
+	private FruitCommondityDAO fruitCommondityDAO;
 	@Override
 	public QueryOrderMsgBO selectByOrderNum(String orderNum) {
 		// TODO Auto-generated method stub
@@ -33,6 +37,7 @@ public class OrderMsgServiceImpl implements OrderMsgService {
 			List<OrderMsgPO> orderMsgPOs=orderMsgDAO.selectByOrderNum(orderNum);
 			if(orderMsgPOs!=null&&orderMsgPOs.size()>0) {
 				for(OrderMsgPO po:orderMsgPOs) {
+				FruitCommondityPO fruitCommondityPO=fruitCommondityDAO.queryById(po.getCommondityId());
 				OrderMsgBO orderMsgBO=new OrderMsgBO();	
 				orderMsgBO.setCommondityId(po.getCommondityId());
 				orderMsgBO.setComName(po.getComName());
@@ -42,6 +47,9 @@ public class OrderMsgServiceImpl implements OrderMsgService {
 				orderMsgBO.setFruitNum(po.getFruitNum());
 				orderMsgBO.setOrderNum(po.getOrderNum());
 				orderMsgBO.setTotalPrice(po.getTotalPrice());
+				if(fruitCommondityPO!=null) {
+					orderMsgBO.setComPhDress(fruitCommondityPO.getComPhDress());
+				}
 				orderMsgBOs.add(orderMsgBO);
 				}
 			}

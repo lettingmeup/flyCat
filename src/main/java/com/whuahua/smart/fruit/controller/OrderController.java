@@ -62,4 +62,10 @@ public class OrderController {
 		RespBaseBO bo=orderMsgService.insert(orderMsgBO);
 		return bo;
 	}
+	@RequestMapping(value="updateState" ,method=RequestMethod.POST)
+	@ResponseBody
+	public RespBaseBO update(@RequestBody Long id){
+		RespBaseBO bo=fruitOrderService.update(id);
+		return bo;
+	}
 }
